@@ -22,6 +22,14 @@ modbus_controller:
 
 nilan:
 
+climate:
+  - platform: nilan
+    name: Nilan
+    current_temp_sensor_id: nilan_exhaust_temp_t10
+    target_temp_sensor_id: nilan_target_temperature_set
+    fan_speed_sensor_id: nilan_ventilation_speed_set
+    mode_select_id: nilan_set_operation_mode
+
 select:
   - platform: modbus_controller
     modbus_controller_id: nilan_modbus_controller
