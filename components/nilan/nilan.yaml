@@ -81,6 +81,19 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: nilan_modbus_controller
+    name: "Lauhdutin"
+    id: nilan_evaporator_temp_t5
+    unit_of_measurement: °C
+    accuracy_decimals: 1
+    device_class: temperature
+    register_type: read
+    value_type: S_WORD
+    address: 206
+    filters:
+      - multiply: 0.01
+
+  - platform: modbus_controller
+    modbus_controller_id: nilan_modbus_controller
     name: "Höyrystin"
     id: nilan_condenser_temp_t5
     unit_of_measurement: °C
@@ -239,13 +252,13 @@ sensor:
     register_type: read
     address: 1104    
 
-  - platform: template
-    name: "Heat exchange efficiency"
-    id: nilan_heat_exchange_efficiency
-    unit_of_measurement: '%'
-    accuracy_decimals: 1
-    lambda: !lambda |-
-      return (id(nilan_inlet_temp_t7).state-id(nilan_fresh_air_temp_t1).state)/(id(nilan_condenser_temp_t5).state-id(nilan_fresh_air_temp_t1).state)*100.0;
+#  - platform: template
+#    name: "Heat exchange efficiency"
+#    id: nilan_heat_exchange_efficiency
+#    unit_of_measurement: '%'
+#    accuracy_decimals: 1
+#    lambda: !lambda |-
+#      return (id(nilan_inlet_temp_t7).state-id(nilan_fresh_air_temp_t1).state)/(id(nilan_condenser_temp_t5).state-id(nilan_fresh_air_temp_t1).state)*100.0;
 
   # - platform: modbus_controller
   #   modbus_controller_id: nilan_modbus_controller
