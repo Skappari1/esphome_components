@@ -310,7 +310,7 @@ sensor:
     unit_of_measurement: '%'
     accuracy_decimals: 1
     lambda: !lambda |-
-      return (id(nilan_inlet_temp_t7).state+id(nilan_fresh_air_temp_t1).state)/(id(nilan_exhaust_temp_t10).state-id(nilan_fresh_air_temp_t1).state)*100.0;
+      return (id(nilan_inlet_temp_t7).state-id(nilan_fresh_air_temp_t1).state)/(id(nilan_exhaust_temp_t10).state-id(nilan_fresh_air_temp_t1).state)*100.0;
       
 ###########################
 #### HOLDING REGISTERS ####
