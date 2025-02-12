@@ -681,15 +681,10 @@ switch:
     use_write_multiple: true
     address: 1001
     
-  - platform: gpio
-    pin: 3
-    name: "Brugervalg 1"   
-    id: nilan_user_function2_switch
-      
-  - platform: gpio
-    pin: 4
-    name: "Brugervalg 2"   
-    id: nilan_user_funtion2_switch      
+#  - platform: gpio
+#    pin: 3
+#    name: "Brugervalg 1"   
+#    id: nilan_user_function2_switch      
     
 climate:
   - platform: nilan
