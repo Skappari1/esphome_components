@@ -81,8 +81,8 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: nilan_modbus_controller
-    name: "Lauhdutin"
-    id: nilan_evaporator_temp_t5
+    name: "Höyrystin"
+    id: nilan_condenser_temp_t5
     unit_of_measurement: °C
     accuracy_decimals: 1
     device_class: temperature
@@ -94,8 +94,8 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: nilan_modbus_controller
-    name: "Höyrystin"
-    id: nilan_condenser_temp_t6
+    name: "Lauhdutin"
+    id: nilan_evaporator_temp_t6
     unit_of_measurement: °C
     accuracy_decimals: 1
     device_class: temperature
@@ -120,7 +120,59 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: nilan_modbus_controller
-    name: "Humidity"
+    name: "Poistoilma"
+    id: nilan_exhaust_temp_t10
+    unit_of_measurement: °C
+    accuracy_decimals: 1
+    device_class: temperature
+    register_type: read
+    value_type: S_WORD
+    address: 210
+    filters:
+      - multiply: 0.01
+
+  - platform: modbus_controller
+    modbus_controller_id: nilan_modbus_controller
+    name: "Vesi yläosa"
+    id: nilan_hot_water_top_temp_t11
+    unit_of_measurement: °C
+    accuracy_decimals: 1
+    device_class: temperature
+    register_type: read
+    value_type: S_WORD
+    address: 211
+    filters:
+      - multiply: 0.01
+
+  - platform: modbus_controller
+    modbus_controller_id: nilan_modbus_controller
+    name: "Vesi alaosa"
+    id: nilan_hot_water_bottom_temp_t12
+    unit_of_measurement: °C
+    accuracy_decimals: 1
+    device_class: temperature
+    register_type: read
+    value_type: S_WORD
+    address: 212
+    filters:
+      - multiply: 0.01
+
+  - platform: modbus_controller
+    modbus_controller_id: nilan_modbus_controller
+    name: "Paneli"
+    id: nilan_panel_temp_t15
+    unit_of_measurement: °C
+    accuracy_decimals: 1
+    device_class: temperature
+    register_type: read
+    value_type: S_WORD
+    address: 215
+    filters:
+      - multiply: 0.01
+
+  - platform: modbus_controller
+    modbus_controller_id: nilan_modbus_controller
+    name: "Kosteus"
     id: nilan_humidity
     unit_of_measurement: '%'
     accuracy_decimals: 1
@@ -132,7 +184,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: nilan_modbus_controller
-    name: "Active alarms"
+    name: "Aktiivinen hälytys"
     id: nilan_active_alarms
     accuracy_decimals: 0
     register_type: read
@@ -140,7 +192,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: nilan_modbus_controller
-    name: "Alarm list 1 id"
+    name: "Hälytys 1 koodi"
     id: nilan_alarm_list_1_id
     accuracy_decimals: 0
     register_type: read
@@ -148,7 +200,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: nilan_modbus_controller
-    name: "Alarm list 1 date"
+    name: "Hälytys 1 pvm"
     id: nilan_alarm_list_1_date
     accuracy_decimals: 0
     register_type: read
@@ -156,7 +208,7 @@ sensor:
     
   - platform: modbus_controller
     modbus_controller_id: nilan_modbus_controller
-    name: "Alarm list 1 time"
+    name: "Hälytys 1 aika"
     id: nilan_alarm_list_1_time
     accuracy_decimals: 0
     register_type: read
@@ -164,7 +216,7 @@ sensor:
     
   - platform: modbus_controller
     modbus_controller_id: nilan_modbus_controller
-    name: "Alarm list 2 id"
+    name: "Hälytys 2 koodi"
     id: nilan_alarm_list_2_id
     accuracy_decimals: 0
     register_type: read
@@ -172,7 +224,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: nilan_modbus_controller
-    name: "Alarm list 2 date"
+    name: "Hälytys 2 pvm"
     id: nilan_alarm_list_2_date
     accuracy_decimals: 0
     register_type: read
@@ -180,7 +232,7 @@ sensor:
     
   - platform: modbus_controller
     modbus_controller_id: nilan_modbus_controller
-    name: "Alarm list 2 time"
+    name: "Hälytys 2 aika"
     id: nilan_alarm_list_2_time
     accuracy_decimals: 0
     register_type: read
@@ -188,7 +240,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: nilan_modbus_controller
-    name: "Alarm list 3 id"
+    name: "Hälytys 3 koodi"
     id: nilan_alarm_list_3_id
     accuracy_decimals: 0
     register_type: read
@@ -196,7 +248,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: nilan_modbus_controller
-    name: "Alarm list 3 date"
+    name: "Hälytys 3 pvm"
     id: nilan_alarm_list_3_date
     accuracy_decimals: 0
     register_type: read
@@ -204,7 +256,7 @@ sensor:
     
   - platform: modbus_controller
     modbus_controller_id: nilan_modbus_controller
-    name: "Alarm list 3 time"
+    name: "Hälytys 3 aika"
     id: nilan_alarm_list_3_time
     accuracy_decimals: 0
     register_type: read
