@@ -265,7 +265,7 @@ sensor:
     
   - platform: modbus_controller
     modbus_controller_id: nilan_modbus_controller
-    name: "Actual fan step"
+    name: "Puhallin nopeus"
     id: nilan_actual_fan_step
     accuracy_decimals: 0
     register_type: read
@@ -273,7 +273,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: nilan_modbus_controller
-    name: "Actual inlet fan step"
+    name: "Tulopuhaltimen nopeus"
     id: nilan_actual_inlet_fan_step
     accuracy_decimals: 0
     register_type: read
@@ -281,7 +281,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: nilan_modbus_controller
-    name: "Actual exhaust fan step"
+    name: "Poistopuhaltimen nopeus"
     id: nilan_actual_exhaust_fan_step
     accuracy_decimals: 0
     register_type: read
@@ -289,7 +289,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: nilan_modbus_controller
-    name: "Days since last filter change alarm"
+    name: "Edellinen suodatinhälytys"
     id: nilan_days_since_last_filter_alarm
     unit_of_measurement: 'days'
     accuracy_decimals: 0
@@ -298,7 +298,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: nilan_modbus_controller
-    name: "Days to next filter change alarm"
+    name: "Suodattimien vaihto"
     id: nilan_days_to_next_filter_alarm
     unit_of_measurement: 'days'
     accuracy_decimals: 0
@@ -318,7 +318,7 @@ sensor:
 ###########################
   - platform: modbus_controller
     modbus_controller_id: nilan_modbus_controller
-    name: "Exhaust fan speed"
+    name: "Poistopuhaltimen nopeus"
     id: nilan_exhaust_fan_speed
     unit_of_measurement: '%'
     icon: "mdi:percent"
@@ -330,7 +330,7 @@ sensor:
     
   - platform: modbus_controller
     modbus_controller_id: nilan_modbus_controller
-    name: "Inlet fan speed"
+    name: "Tulopuhaltimen nopeus"
     id: nilan_inlet_fan_speed
     unit_of_measurement: '%'
     icon: "mdi:percent"
@@ -358,7 +358,7 @@ binary_sensor:
 #########################
   - platform: modbus_controller
     modbus_controller_id: nilan_modbus_controller
-    name: "User function"
+    name: "Etäkytkin"
     id: nilan_user_function
     register_type: read
     address: 100
@@ -374,15 +374,7 @@ binary_sensor:
 
   - platform: modbus_controller
     modbus_controller_id: nilan_modbus_controller
-    name: "User function 2"
-    id: nilan_user_function_2
-    register_type: read
-    address: 113
-    bitmask: 1
-
-  - platform: modbus_controller
-    modbus_controller_id: nilan_modbus_controller
-    name: "Summer mode"
+    name: "Kesämoodi"
     id: nilan_is_summer
     register_type: read
     address: 1200
@@ -406,7 +398,7 @@ text_sensor:
       
   - platform: modbus_controller
     modbus_controller_id: nilan_modbus_controller
-    name: "Actual user function"
+    name: "Etäkytkin"
     id: nilan_actual_user_function
     register_type: holding
     address: 600
@@ -415,37 +407,13 @@ text_sensor:
       ESP_LOGD("main","Parsed user function int : %d", int_user_function);
       std::string actual_user_function;
       switch(int_user_function) {
-        case 0: { actual_user_function = "0 : None"; break; }
-        case 1: { actual_user_function = "1 : Extend"; break; }
-        case 2: { actual_user_function = "2 : Inlet"; break; }
-        case 3: { actual_user_function = "3 : Exhaust"; break; }
-        case 4: { actual_user_function = "4 : External heater offset"; break; }
-        case 5: { actual_user_function = "5 : Ventilate"; break; }
-        case 6: { actual_user_function = "6 : Cooker Hood"; break; }
+        case 0: { actual_user_function = "0 : Off"; break; }
+        case 1: { actual_user_function = "2 : Tulopuhallin"; break; }
+        case 2: { actual_user_function = "3 : Poistopuhallin"; break; }
+        case 3: { actual_user_function = "5 : Molemmat"; break; }
       }
       return actual_user_function;
 
-  - platform: modbus_controller
-    modbus_controller_id: nilan_modbus_controller
-    name: "Actual user function 2"
-    id: nilan_actual_user_function2
-    register_type: holding
-    address: 610
-    lambda: !lambda |-
-      uint16_t int_user_function2 = (data[item->offset] << 8) + data[item->offset+1];
-      ESP_LOGD("main","Parsed user function 2 int : %d", int_user_function2);
-      std::string actual_user_function2;
-      switch(int_user_function2) {
-        case 0: { actual_user_function2 = "0 : None"; break; }
-        case 1: { actual_user_function2 = "1 : Extend"; break; }
-        case 2: { actual_user_function2 = "2 : Inlet"; break; }
-        case 3: { actual_user_function2 = "3 : Exhaust"; break; }
-        case 4: { actual_user_function2 = "4 : External heater offset"; break; }
-        case 5: { actual_user_function2 = "5 : Ventilate"; break; }
-        case 6: { actual_user_function2 = "6 : Cooker Hood"; break; }
-      }
-      return actual_user_function2;
-      
   - platform: modbus_controller
     modbus_controller_id: nilan_modbus_controller
     name: "Operation mode"
@@ -458,17 +426,17 @@ text_sensor:
       std::string mode_str;
       switch (int_mode) {
         case 0: mode_str = "Off"; break;
-        case 1: mode_str = "Heat"; break;
-        case 2: mode_str = "Cool"; break;
+        case 1: mode_str = "Lämmitys"; break;
+        case 2: mode_str = "Jäähdytys"; break;
         case 3: mode_str = "Auto"; break;
-        case 4: mode_str = "Service"; break;
+        case 4: mode_str = "Huolto"; break;
         default: mode_str = "Unknown"; break;
       }
       return mode_str;
       
   - platform: modbus_controller
     modbus_controller_id: nilan_modbus_controller
-    name: "Control mode"
+    name: "Mode"
     id: nilan_control_state
     register_type: read
     address: 1002
@@ -482,15 +450,15 @@ text_sensor:
         case 2:  mode_str = "Stop"; break;
         case 3:  mode_str = "Start"; break;
         case 4:  mode_str = "Standby"; break;
-        case 5:  mode_str = "Ventilation stop"; break;
+        case 5:  mode_str = "IV Off"; break;
         case 6:  mode_str = "Ventilation"; break;
-        case 7:  mode_str = "Heating"; break;
-        case 8:  mode_str = "Cooling"; break;
-        case 9:  mode_str = "Hot water"; break;
+        case 7:  mode_str = "Lämmitys"; break;
+        case 8:  mode_str = "Jäähdytys"; break;
+        case 9:  mode_str = "Lämmin vesi"; break;
         case 10: mode_str = "Legionella"; break;
-        case 11: mode_str = "Cooling + hot water"; break;
-        case 12: mode_str = "Central heating"; break;
-        case 13: mode_str = "Defrost"; break;
+        case 11: mode_str = "Jäähdytys ja lämmin vesi"; break;
+        case 12: mode_str = "Keskuslämmitys"; break;
+        case 13: mode_str = "Sulatus"; break;
         default: mode_str = "Unknown"; break;
       }
       return mode_str;
