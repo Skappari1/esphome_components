@@ -1,0 +1,17 @@
+uart:
+  id: mod_bus
+  tx_pin: GPIO17
+  rx_pin: GPIO16
+  baud_rate: 19200
+  stop_bits: 1
+  parity: EVEN
+
+modbus:
+  flow_control_pin: GPIO4
+  id: modbus1
+
+modbus_controller:
+  - id: nilan_modbus_controller
+    address: 1   ## address of the Modbus slave device on the bus
+    modbus_id: modbus1
+    update_interval: 10s
