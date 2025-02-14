@@ -318,7 +318,7 @@ sensor:
 ###########################
   - platform: modbus_controller
     modbus_controller_id: nilan_modbus_controller
-    name: "Poistopuhaltimen nopeus"
+    name: "Poistopuhaltimen nopeus %"
     id: nilan_exhaust_fan_speed
     unit_of_measurement: '%'
     icon: "mdi:percent"
@@ -330,7 +330,7 @@ sensor:
     
   - platform: modbus_controller
     modbus_controller_id: nilan_modbus_controller
-    name: "Tulopuhaltimen nopeus"
+    name: "Tulopuhaltimen nopeus %"
     id: nilan_inlet_fan_speed
     unit_of_measurement: '%'
     icon: "mdi:percent"
