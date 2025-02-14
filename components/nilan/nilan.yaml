@@ -559,7 +559,7 @@ climate:
 
 output:
   - platform: modbus_controller
-    id: Kuittaa hälytys
+    id: nilan_reset_alarm
     address: 400
     use_write_multiple: true
     value_type: U_WORD
