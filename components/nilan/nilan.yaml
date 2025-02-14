@@ -398,7 +398,7 @@ text_sensor:
       
   - platform: modbus_controller
     modbus_controller_id: nilan_modbus_controller
-    name: "Etäkytkin"
+    name: "Etäkytkin asetus"
     id: nilan_actual_user_function
     register_type: holding
     address: 600
@@ -466,7 +466,7 @@ text_sensor:
 number:
   - platform: modbus_controller
     modbus_controller_id: nilan_modbus_controller
-    name: "User time set (minutes)"
+    name: "Etäkytkin aika"
     id: nilan_user_time_set
     value_type: U_WORD
     min_value: 1.0
@@ -489,7 +489,7 @@ number:
     
   - platform: modbus_controller
     modbus_controller_id: nilan_modbus_controller
-    name: "User ventilation speed set"
+    name: "Etäkytkin teho"
     id: nilan_user_ventilation_speed_set
     min_value: 0.0
     max_value: 4.0
@@ -500,7 +500,7 @@ number:
   
   - platform: modbus_controller
     modbus_controller_id: nilan_modbus_controller
-    name: "User temperature set"
+    name: "Etäkytkin lämpötila"
     id: nilan_user_temperature_set
     min_value: 15.0
     max_value: 30.0
@@ -508,55 +508,11 @@ number:
     address: 604
     force_new_range: true
     use_write_multiple: true 
-
-  - platform: modbus_controller
-    modbus_controller_id: nilan_modbus_controller
-    name: "User time set 2 (minutes)"
-    id: nilan_user_time_set2
-    value_type: U_WORD
-    min_value: 1.0
-    max_value: 480.0
-    lambda: !lambda |-
-      uint16_t hours = x/100; // 100 is 1 hour
-      uint16_t minutes = ((uint16_t)x) % 100;
-      return (hours*60) + minutes;
-    write_lambda: !lambda |-
-      uint16_t intVal = x;
-      uint16_t firstDigit = (intVal / 60); // 1 hour is written as '100' and not '60'
-      uint16_t lastDigits = (intVal % 60); // 1:30 hours is written as '130' and not '90'
-      uint16_t result = (firstDigit*100) + lastDigits;
-      payload = modbus_controller::float_to_payload(result, modbus_controller::SensorValueType::U_WORD);
-      return x;
-    step: 1.0
-    address: 612
-    force_new_range: true
-    use_write_multiple: true 
+ 
     
   - platform: modbus_controller
     modbus_controller_id: nilan_modbus_controller
-    name: "User ventilation speed set 2"
-    id: nilan_user_ventilation_speed_set2
-    min_value: 0.0
-    max_value: 4.0
-    step: 1.0
-    address: 613
-    force_new_range: true
-    use_write_multiple: true 
-  
-  - platform: modbus_controller
-    modbus_controller_id: nilan_modbus_controller
-    name: "User temperature set 2"
-    id: nilan_user_temperature_set2
-    min_value: 15.0
-    max_value: 30.0
-    step: 1.0
-    address: 614
-    force_new_range: true
-    use_write_multiple: true 
-    
-  - platform: modbus_controller
-    modbus_controller_id: nilan_modbus_controller
-    name: "Ventilation speed set"
+    name: "Puhallusteho"
     id: nilan_ventilation_speed_set
     min_value: 0
     max_value: 4
@@ -567,7 +523,7 @@ number:
 
   - platform: modbus_controller
     modbus_controller_id: nilan_modbus_controller
-    name: "Temperature set"
+    name: "Lämpötila asetus"
     id: nilan_target_temperature_set
     min_value: 12
     max_value: 30
@@ -580,7 +536,7 @@ number:
 switch:
   - platform: modbus_controller
     modbus_controller_id: nilan_modbus_controller
-    name: "On/Off state"
+    name: "On/Off"
     id: nilan_on_off_state
     register_type: holding
     bitmask: 1
@@ -603,7 +559,7 @@ climate:
 
 output:
   - platform: modbus_controller
-    id: nilan_reset_alarm
+    id: Kuittaa hälytys
     address: 400
     use_write_multiple: true
     value_type: U_WORD
