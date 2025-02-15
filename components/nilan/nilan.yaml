@@ -554,7 +554,7 @@ number:
   - platform: modbus_controller
     modbus_controller_id: nilan_modbus_controller
     name: "Vesi ylä"
-    id: nilan_target_temperature_set
+    id: nilan_water_top_target_temperature_set
     min_value: 4
     max_value: 75
     step: 1.0
@@ -566,7 +566,7 @@ number:
   - platform: modbus_controller
     modbus_controller_id: nilan_modbus_controller
     name: "Vesi ala"
-    id: nilan_target_temperature_set
+    id: nilan_water_bottom_target_temperature_set
     min_value: 4
     max_value: 65
     step: 1.0
