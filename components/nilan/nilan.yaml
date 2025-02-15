@@ -567,7 +567,7 @@ output:
     
 button:
   - platform: output
-    name: Reset alarm
+    name: Hälytyksen kuittaus
     id: nilan_reset_alarm_button
     output: nilan_reset_alarm
     duration: 5s
