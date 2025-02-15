@@ -374,11 +374,29 @@ binary_sensor:
 
   - platform: modbus_controller
     modbus_controller_id: nilan_modbus_controller
+    name: "Korkepainekytkin"
+    id: nilan_hi_pressure
+    register_type: read
+    address: 107
+    bitmask: 1
+
+  - platform: modbus_controller
+    modbus_controller_id: nilan_modbus_controller
+    name: "Sulatus"
+    id: nilan_defrost
+    register_type: read
+    address: 112
+    bitmask: 1
+
+  - platform: modbus_controller
+    modbus_controller_id: nilan_modbus_controller
     name: "Kesämoodi"
     id: nilan_is_summer
     register_type: read
     address: 1200
     bitmask: 1
+
+
 
 ###########################
 #### HOLDING REGISTERS ####
